@@ -7,68 +7,119 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kriptotakip.data.StorageManager
-import com.example.kriptotakip.data.remote.RetrofitClient
-import com.example.kriptotakip.domain.CoinResponse
+import com.example.kriptotakip.repository.CoinRepository
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.coroutines.launch
 
 class CoinViewModel(application: Application) : AndroidViewModel(application) {
-    private val api = RetrofitClient.api
-    private val storage = StorageManager(application)
 
-    // Fiyat ve yüzde bilgilerini tutan çekmeceler
-    var prices by mutableStateOf(mapOf<String, Double>())
-    var percentages by mutableStateOf(mapOf<String, String>())
-    var previousPrices by mutableStateOf(mapOf<String, Double>())
-    var allCoinsList by mutableStateOf(listOf<CoinResponse>())
+    private val repository = CoinRepository(StorageManager(application))
+    private val auth = FirebaseAuth.getInstance()
 
-    // Favori listesini uygulama açıldığında hafızadan yüklüyoruz
-    var favoriteList by mutableStateOf(storage.getFavorites())
+    var uiState by mutableStateOf(CoinUiState())
+        private set
 
-    val currentPrice: Double get() = prices["BTCUSDT"] ?: 0.0
-    val previousPrice: Double get() = previousPrices["BTCUSDT"] ?: 0.0
+    init {
+        fetchAllData()
+        startLiveUpdates()
+    }
 
-    // Bütün popüler coinleri ilk açılışta çeker
     fun fetchAllData() {
         viewModelScope.launch {
+            uiState = uiState.copy(isLoading = true)
+            
             try {
-                val response = api.getAllCoins()
-                allCoinsList = response
-                // toString hatası forEach olarak düzeltildi
-                response.forEach { coin ->
+                val coins = repository.getAllCoins()
+                val userData = repository.getUserData()
+
+                uiState = uiState.copy(
+                    coins = coins,
+                    favoriteList = userData.first,
+                    isDarkMode = userData.second,
+                    profileColor = userData.third,
+                    isLoading = false
+                )
+
+                coins.forEach { coin ->
                     updatePrice(coin.symbol, coin.lastPrice.toDouble(), coin.priceChangePercent)
                 }
             } catch (e: Exception) {
-                // Hata yönetimi buraya eklenebilir
+                uiState = uiState.copy(isLoading = false)
             }
         }
     }
 
-    // Favori ekleme/çıkarma ve hafızaya kaydetme mantığı
+    private fun startLiveUpdates() {
+        repository.startSocket { symbol, price, percent ->
+            updatePrice(symbol, price, percent)
+        }
+    }
+
+    fun updatePrice(symbol: String, newPrice: Double, newPercent: String) {
+        val currentPrices = uiState.prices.toMutableMap()
+        val currentPreviousPrices = uiState.previousPrices.toMutableMap()
+        val currentPercentages = uiState.percentages.toMutableMap()
+
+        val oldPrice = currentPrices[symbol] ?: 0.0
+
+        if (newPrice != oldPrice) {
+            currentPreviousPrices[symbol] = oldPrice
+            currentPrices[symbol] = newPrice
+        }
+        currentPercentages[symbol] = newPercent
+
+        uiState = uiState.copy(
+            prices = currentPrices,
+            previousPrices = currentPreviousPrices,
+            percentages = currentPercentages
+        )
+    }
+
     fun toggleFavorite(symbol: String) {
-        val currentFavorites = favoriteList.toMutableSet()
-        
+        val currentFavorites = uiState.favoriteList.toMutableSet()
+
         if (currentFavorites.contains(symbol)) {
             currentFavorites.remove(symbol)
         } else {
             currentFavorites.add(symbol)
         }
-        
-        // State'i güncelle (UI'ın değişmesi için)
-        favoriteList = currentFavorites
-        
-        // Hafızaya kalıcı olarak kaydet
-        storage.saveFavorites(currentFavorites)
+
+        uiState = uiState.copy(favoriteList = currentFavorites)
+        repository.saveUserData(currentFavorites, uiState.isDarkMode, uiState.profileColor)
     }
 
-    // Soketten gelen canlı verileri işleme
-    fun updatePrice(symbol: String, newPrice: Double, newPercent: String) {
-        val currentPrice = prices[symbol] ?: 0.0
-        
-        // Fiyat değiştiyse eski fiyatı kaydet (Renk değişimi için)
-        if (newPrice != currentPrice) {
-            previousPrices = previousPrices + (symbol to currentPrice)
-            prices = prices + (symbol to newPrice)
+    fun toggleTheme(isDark: Boolean) {
+        uiState = uiState.copy(isDarkMode = isDark)
+        repository.saveUserData(uiState.favoriteList, isDark, uiState.profileColor)
+    }
+
+    fun updateProfileColor(color: Long) {
+        uiState = uiState.copy(profileColor = color)
+        repository.saveUserData(uiState.favoriteList, uiState.isDarkMode, color)
+    }
+
+    // İsim güncelleme fonksiyonu
+    fun updateName(newName: String) {
+        viewModelScope.launch {
+            val user = auth.currentUser
+            if (user != null && newName.isNotBlank()) {
+                // 1. Firebase Auth Profilini Güncelle
+                val profileUpdates = UserProfileChangeRequest.Builder()
+                    .setDisplayName(newName)
+                    .build()
+                user.updateProfile(profileUpdates)
+                
+                // 2. Firestore'u Güncelle
+                repository.updateUserName(newName)
+                
+                // 3. UI'ı tazele (İsim bilgilerini yeniden yükle)
+                // Normalde reload() gerekebilir ama biz direkt user nesnesini tazeleyebiliriz
+            }
         }
-        percentages = percentages + (symbol to newPercent)
+    }
+
+    fun updateSearchQuery(query: String) {
+        uiState = uiState.copy(searchQuery = query)
     }
 }

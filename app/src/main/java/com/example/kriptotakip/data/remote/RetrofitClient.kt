@@ -2,7 +2,7 @@ package com.example.kriptotakip.data.remote
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
+// güncel kripto fiyatları
 object RetrofitClient {
     private const val BASE_URL = "https://api.binance.com/"
 

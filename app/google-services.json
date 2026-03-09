@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "363256919179",
+    "project_id": "kripto-takip-c3ad9",
+    "storage_bucket": "kripto-takip-c3ad9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363256919179:android:feb03c28a5fa838875108e",
+        "android_client_info": {
+          "package_name": "com.example.kriptotakip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363256919179-e004pvn8kqplvumskhfrkpf3qsiioei3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kriptotakip",
+            "certificate_hash": "25fc82cc77a4f060f02a074c7e86ca0e51d2aa2b"
+          }
+        },
+        {
+          "client_id": "363256919179-4t9tpi4nr6f9klnb4ud6taa3a4gb5ng8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaSKd8EdjUXuxyOkyBNWy4wCJwEKmFw4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363256919179-4t9tpi4nr6f9klnb4ud6taa3a4gb5ng8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

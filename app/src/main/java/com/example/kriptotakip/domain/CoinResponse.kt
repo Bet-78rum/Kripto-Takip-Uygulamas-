@@ -1,4 +1,4 @@
-package com.example.kriptotakip.domain
+package com.betul.kriptotakip.domain
 
 data class CoinResponse(
     val symbol: String,

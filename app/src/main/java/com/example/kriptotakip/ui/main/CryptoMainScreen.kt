@@ -1,4 +1,4 @@
-package com.example.kriptotakip.ui.main
+package com.betul.kriptotakip.ui.main
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,9 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.kriptotakip.presentation.CoinViewModel
-import com.example.kriptotakip.ui.components.CoinDetailCard
-import com.example.kriptotakip.ui.theme.KriptoTakipTheme
+import com.betul.kriptotakip.presentation.CoinViewModel
+import com.betul.kriptotakip.ui.components.CoinDetailCard
+import com.betul.kriptotakip.ui.theme.KriptoTakipTheme
 
 @Composable
 fun CryptoMainScreen(

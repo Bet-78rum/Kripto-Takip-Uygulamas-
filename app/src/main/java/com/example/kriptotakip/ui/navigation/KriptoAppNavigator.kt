@@ -1,12 +1,12 @@
-package com.example.kriptotakip.ui.navigation
+package com.betul.kriptotakip.ui.navigation
 
 import androidx.compose.runtime.*
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.kriptotakip.presentation.CoinViewModel
-import com.example.kriptotakip.ui.auth.LoginScreen
-import com.example.kriptotakip.ui.auth.RegisterScreen
-import com.example.kriptotakip.ui.main.CryptoMainScreen
-import com.example.kriptotakip.ui.profile.ProfileScreen
+import com.betul.kriptotakip.presentation.CoinViewModel
+import com.betul.kriptotakip.ui.auth.LoginScreen
+import com.betul.kriptotakip.ui.auth.RegisterScreen
+import com.betul.kriptotakip.ui.main.CryptoMainScreen
+import com.betul.kriptotakip.ui.profile.ProfileScreen
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable

@@ -1,4 +1,4 @@
-package com.example.kriptotakip.ui.profile
+package com.betul.kriptotakip.ui.profile
 
 // Gerekli arayüz ve sistem kütüphanelerini içeri aktarıyoruz
 import androidx.compose.foundation.background
@@ -19,8 +19,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.kriptotakip.data.StorageManager
-import com.example.kriptotakip.presentation.CoinViewModel
+import com.betul.kriptotakip.data.StorageManager
+import com.betul.kriptotakip.presentation.CoinViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 // Material 3'ün bazı özellikleri hala geliştirme aşamasında olduğu için bu onayı veriyoruz

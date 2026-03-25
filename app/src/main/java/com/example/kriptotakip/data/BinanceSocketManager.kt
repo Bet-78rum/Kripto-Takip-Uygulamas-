@@ -1,4 +1,4 @@
-package com.example.kriptotakip.data
+package com.betul.kriptotakip.data
 
 import okhttp3.OkHttpClient
 import okhttp3.Request

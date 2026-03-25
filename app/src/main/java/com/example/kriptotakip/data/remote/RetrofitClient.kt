@@ -1,4 +1,4 @@
-package com.example.kriptotakip.data.remote
+package com.betul.kriptotakip.data.remote
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

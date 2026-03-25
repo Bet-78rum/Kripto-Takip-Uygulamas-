@@ -1,4 +1,4 @@
-package com.example.kriptotakip.ui.auth
+package com.betul.kriptotakip.ui.auth
 
 import android.util.Log
 import androidx.compose.foundation.layout.*

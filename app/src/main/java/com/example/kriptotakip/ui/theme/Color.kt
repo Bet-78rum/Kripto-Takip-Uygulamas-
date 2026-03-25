@@ -1,4 +1,4 @@
-package com.example.kriptotakip.ui.theme
+package com.betul.kriptotakip.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

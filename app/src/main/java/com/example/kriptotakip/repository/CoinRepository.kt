@@ -1,9 +1,9 @@
-package com.example.kriptotakip.repository
+package com.betul.kriptotakip.repository
 
-import com.example.kriptotakip.data.BinanceSocketManager
-import com.example.kriptotakip.data.StorageManager
-import com.example.kriptotakip.data.remote.RetrofitClient
-import com.example.kriptotakip.domain.CoinResponse
+import com.betul.kriptotakip.data.BinanceSocketManager
+import com.betul.kriptotakip.data.StorageManager
+import com.betul.kriptotakip.data.remote.RetrofitClient
+import com.betul.kriptotakip.domain.CoinResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await

@@ -1,6 +1,6 @@
-package com.example.kriptotakip.presentation
+package com.betul.kriptotakip.presentation
 
-import com.example.kriptotakip.domain.CoinResponse
+import com.betul.kriptotakip.domain.CoinResponse
 
 data class CoinUiState(
     val coins: List<CoinResponse> = emptyList(),

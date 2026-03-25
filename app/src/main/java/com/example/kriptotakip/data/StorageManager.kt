@@ -1,4 +1,4 @@
-package com.example.kriptotakip.data
+package com.betul.kriptotakip.data
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:363256919179:android:feb03c28a5fa838875108e",
         "android_client_info": {
-          "package_name": "com.example.kriptotakip"
+          "package_name": "com.betul.kriptotakip"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "363256919179-e004pvn8kqplvumskhfrkpf3qsiioei3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.kriptotakip",
+            "package_name": "com.betul.kriptotakip",
             "certificate_hash": "25fc82cc77a4f060f02a074c7e86ca0e51d2aa2b"
           }
         },

@@ -1,4 +1,4 @@
-package com.example.kriptotakip
+package com.betul.kriptotakip
 
 import org.junit.Test
 

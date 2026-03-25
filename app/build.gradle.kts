@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.kriptotakip"
+    namespace = "com.betul.kriptotakip"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.kriptotakip"
+        applicationId = "com.betul.kriptotakip"
         minSdk = 28
         targetSdk = 36
         versionCode = 1

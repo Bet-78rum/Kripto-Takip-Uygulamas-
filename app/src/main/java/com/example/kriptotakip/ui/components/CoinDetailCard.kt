@@ -1,4 +1,4 @@
-package com.example.kriptotakip.ui.components
+package com.betul.kriptotakip.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

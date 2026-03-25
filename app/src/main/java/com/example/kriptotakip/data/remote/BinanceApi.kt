@@ -1,6 +1,6 @@
-package com.example.kriptotakip.data.remote
+package com.betul.kriptotakip.data.remote
 
-import com.example.kriptotakip.domain.CoinResponse
+import com.betul.kriptotakip.domain.CoinResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

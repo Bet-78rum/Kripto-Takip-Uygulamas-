@@ -1,4 +1,4 @@
-package com.example.kriptotakip.presentation
+package com.betul.kriptotakip.presentation
 
 import android.app.Application
 import androidx.compose.runtime.getValue
@@ -6,8 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kriptotakip.data.StorageManager
-import com.example.kriptotakip.repository.CoinRepository
+import com.betul.kriptotakip.data.StorageManager
+import com.betul.kriptotakip.repository.CoinRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.coroutines.launch

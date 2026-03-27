@@ -17,7 +17,6 @@ class CoinRepository(private val storage: StorageManager) {
         return api.getAllCoins()
     }
 
-    // Kullanıcı Verilerini Getir
     suspend fun getUserData(): Triple<Set<String>, Boolean, Long> {
         val userId = auth.currentUser?.uid
         if (userId != null) {
@@ -26,14 +25,12 @@ class CoinRepository(private val storage: StorageManager) {
                 val favorites = (document.get("favorites") as? List<String>)?.toSet() ?: emptySet()
                 val isDarkMode = document.getBoolean("isDarkMode") ?: false
                 val profileColor = document.getLong("profileColor") ?: 0xFF1ABC9CL
-                
                 return Triple(favorites, isDarkMode, profileColor)
             } catch (e: Exception) { }
         }
         return Triple(storage.getFavorites(), storage.getTheme(), 0xFF1ABC9CL)
     }
 
-    // Kullanıcı Verilerini Kaydet
     fun saveUserData(favorites: Set<String>, isDarkMode: Boolean, profileColor: Long) {
         val userId = auth.currentUser?.uid
         if (userId != null) {
@@ -46,7 +43,6 @@ class CoinRepository(private val storage: StorageManager) {
         }
     }
 
-    // Sadece İsim Güncelleme
     fun updateUserName(newName: String) {
         val userId = auth.currentUser?.uid
         if (userId != null) {
@@ -54,6 +50,7 @@ class CoinRepository(private val storage: StorageManager) {
         }
     }
 
+    // Geri çağırma tipini (symbol, price, percent) eskisi gibi tekil yaptık
     fun startSocket(onDataReceived: (String, Double, String) -> Unit): BinanceSocketManager {
         val socket = BinanceSocketManager(onDataReceived)
         socket.start()
